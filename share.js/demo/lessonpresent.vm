@@ -1,0 +1,334 @@
+#set($layout="/layout/layout_mylesson.vm") #set($pageTitle = "我的课程")
+<link rel="stylesheet" media="all"
+	href="$link.relative('/resources_two/js/assets/application.css')">
+<link rel="stylesheet" type="text/css"
+	href="$link.relative('/resources_two/css/reset.css')">
+<link rel="stylesheet" type="text/css"
+	href="$link.relative('/resources_two/css/nav.css')">
+<link rel="stylesheet"
+	href="$link.relative('/resources_two/css/lessondetails.css')">
+
+<script src="$link.relative('/resources_two/js/do_search.js')"></script>
+<script src="$link.relative('/resources_two/js/assets/application.js')"></script>
+<script src="$link.relative('/resources_two/js/jquery-ui.js')"></script>
+<script src="$link.relative('/resources_two/js/lessondetails.js')"></script>
+
+<link rel="stylesheet" type="text/css" href="/resources_two/share/style/fonts/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/resources_two/share/style/css/ishare.css">
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shCore.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushCpp.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushCSharp.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushDelphi.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushDiff.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushGroovy.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushJava.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushPlain.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushRuby.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushScala.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushSql.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushVb.js"></script>
+	<script type="text/javascript" src="/resources_two/share/codeSyntax/scripts/shBrushXml.js"></script>
+	<link type="text/css" rel="stylesheet" href="/resources_two/share/codeSyntax/styles/shCore.css"/>
+	<link type="text/css" rel="stylesheet" href="/resources_two/share/codeSyntax/styles/shThemeDefault.css"/>
+	<script type="text/javascript">
+	    SyntaxHighlighter.config.clipboardSwf = '/resources_two/share/codeSyntax/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	</script>
+	<style>
+		.demo{
+			position: relative;
+			padding-left: 20px;
+		}
+		.des{
+			background: #f8f8f8;
+		  	padding: 10px;
+		  	color: #d63d18;
+		}
+
+		.xw-share-icon.tencent{
+			background-position: 0px -4032px;
+		}
+		.xw-share-icon.weibo{
+			background-position: 0px 0px;
+		}
+		.xw-share-icon.wechat{
+			background-position: 0px -3680px;
+		}
+		.xw-share-icon.qzone{
+			background-position: 0px -32px;
+		}
+		.xw-share-icon{
+			display: block!important;
+			float: left;
+			height: 32px!important;
+			width: 32px!important;
+			background: url('/resources_two/share/images/jiathis_ico_32x32.png') no-repeat left;
+			cursor: pointer;
+			overflow: hidden;
+		}
+	</style>
+
+
+<!--课程内容详情-->
+<div class="bg100 bg2" style="background-color: #fff;">
+	<div class="bgblack"></div>
+	<div  class="content clearfix lesson300-bg">
+		<!--左侧导航-->
+		<div class="details-nav fl clearfix">
+			<b class="details-navmenu"></b>
+			<ul class="clearfix details-ul"  style="min-height: 470px;">
+				<li class="details-navtitle">$coursePost.gf_title</li>
+				<li class="details-abstract">
+					<p>
+						分类<span class="blue09f">$coursePost.course.subject</span>
+					</p>
+					<p>
+						课程间隔<span>#if($coursePost.interval=='day')每日课程  #elseif($coursePost.interval=='week')每周课程
+						#elseif($coursePost.interval=='month')每月课程   #elseif($coursePost.interval=='month')季度课程
+						#elseif($coursePost.interval=='custom')自定义
+						#else无限制  #end</span>
+					</p>
+					<p>
+						内容<span>#foreach($data in $typenames )<b>#if($data=="exercise")练习 #elseif($data=="video")视频
+						         #elseif($data=="test")测试#elseif($data=="ware")课件 #end</b>#end</span>
+					</p>
+					<p>  
+						标签<span>#foreach($data in $tags)<b class="blue09f">$data</b>#end</span>
+					</p>
+					<p>
+						证书<span>#if($coursePost.course.sendKey==true) 有  #else 无  #end</span>
+					</p>
+					<p>
+						报名规则<span>#if($coursePost.course.kebaoRule=='nolimit')即时报名   #else 限时报名   #end</span>
+					</p>
+					<p> #set($num=$!coursePost.joinNumLimit - $coursePost.totalJoin)
+						剩余名额<span>$!num</span>
+					</p>
+				</li>
+				<li class="no-join">
+					#if($coursePost.getStat() != 9||$!isMyCourse=='true')
+					<p class="clearfix">
+						<span class="fl">第<b class="blue09f">1</b>次开课
+						</span> <span class="fr">开课：$coursePost.startstr</span>
+					</p>
+					<p class="clearfix">
+						<span class="fl blue09f"
+							style="font-size: 16px; font-family: Arial;">&nbsp;<!-- 15:59:14 --></span> <span
+							class="fr">结束：$coursePost.endstr</span>
+					</p>
+						#if($!isMyCourse == 'true')
+						<!--权限非学员时-->
+	                    <p class="study-btn" onclick="location.href='$link.relative('/house/play.htm')?postId=$coursePost.id';">我的课程</p>
+	                    <p style="margin-bottom: 0px;text-align: center;"></p>
+	                    <!-- <li class="process-li"  class="has-join-list"><a  href="$link.relative('/house/play.htm')?postId=$coursePost.id" class="process-a" time="0">课程进程</a></li> -->
+				        <!-- <li class="has-join-list"><a href="$link.relative('/house/teacherstatistics.htm')?postId=$coursePost.id">课程统计</a></li> -->
+						#else
+							#if($coursePost.isJoin() == 'true')
+								#if($coursePost.canStart)
+								<p class="study-btn" onclick="location.href='$link.relative('/house/play.htm')?postId=$coursePost.id';">开始上课</p>
+								<!-- <p class="study-btn">已参加</p> -->
+								#else
+								<p class="study-btn">已参加 未到开课时</p>
+								#end
+							#else
+								#if($coursePost.canStart&&$coursePost.course.kebaoRule == 'limit')
+								<!--过了开课时间的不能报名-->
+			                    <p class="over-btn" style="cursor: not-allowed">课程开始 停止报名</p>
+								#else
+									#if($hasAuthority == 'false')
+			                    	<p class="over-btn" style="cursor: not-allowed">非课程发布对象</p>
+			                    	#elseif($!num==0)
+			                    	<p class="over-btn" style="cursor: not-allowed">报名人数已满</p>
+			                    	#else
+									<p class="join-btn" onclick="join('$coursePost.id')">报名参加</p>
+									<p style="margin-bottom: 0px;">
+										<input type="checkbox" name="agreement" class="agree-checkbox" checked="checked" id="check_agreement">本人已同意<a href="javascript:void(0);"
+											style="color: #09f; text-decoration: underline; margin-left: 5px;"
+											 onclick="greyshow()">火苗MOOC平台协议</a>
+									</p>
+									#end
+								#end
+							#end
+						#end
+					#else
+						#if($!coursePost.powerEnd==0)<p class="over-btn">已结束</p>
+						#else<p class="over-btn">已强制结束</p>
+						#end
+					#end
+				</li>
+				<li><a href="#" class="active">课程介绍</a></li>
+				#if($!isMyCourse != 'true')
+					#if($coursePost.isJoin() == 'true')
+						#if($coursePost.canStart&&$!coursePost.powerEnd==0)
+						<li class="process-li" ><a href="$link.relative('/house/play.htm')?postId=$coursePost.id" class="process-a" time="0">课程进程</a></li>
+						<li><a href="$link.relative('/house/lessonstatistics.htm')?postId=$coursePost.id">课程统计</a></li>
+						#elseif($!coursePost.powerEnd==0)
+						<li class="process-li" class="no-join-list"><a style="color:#666" title="未到开课时间">课程进程</a><i class="list-locked"></i></li>
+						<li class="no-join-list"> <a style="color:#666" title="未到开课时间">课程统计</a><i class="list-locked"></i></li>
+						#end
+					#else
+						<li class="process-li" class="no-join-list"><a style="color:#666" title="请先加入课程">课程进程</a><i class="list-locked"></i></li>
+						<li class="no-join-list"> <a style="color:#666" title="请先加入课程">课程统计</a><i class="list-locked"></i></li>
+					#end
+				#elseif($!coursePost.powerEnd==0)
+				<li class="process-li" class="has-join-list"><a  href="$link.relative('/house/play.htm')?postId=$coursePost.id" class="process-a" time="0">课程进程</a></li>
+				<li class="has-join-list"><a href="$link.relative('/house/teacherstatistics.htm')?postId=$coursePost.id">课程统计</a></li>
+				#end
+			</ul>
+		</div>
+		<input type="hidden" value="$coursePost.id" id="hiddenPostId">
+		<!--右侧内容-->
+		<div class="details-content fl">
+			<b class="details-contmenu"></b>			
+			<div class="present-img">
+				<img class="mengban" src="$link.relative('/resources_two/images/mylesson/mengban.png')" alt="">
+				<input type="hidden" value="$!coursePost.course.iconPath" id="present-img">
+				<div class="present-font">
+					<h1>$coursePost.course.speaker</h1>
+					<h2 style="margin-bottom: 40px;" id="course_post_title_id">#if($coursePost.gf_title=="")$coursePost.course.title #else $coursePost.gf_title #end </h2>
+					<h3>$coursePost.startstr</h3>
+					#if($!isMyCourse != 'true')
+						#if($coursePost.getStat() != 9&&$coursePost.isJoin() == 'true' && $coursePost.canStart)
+						<span class="present-start" onclick="location.href='$link.relative('/house/play.htm')?postId=$coursePost.id';" style="display:inline;">开始学习</span>
+						#else
+						<span class="present-start" onclick="location.href='$link.relative('/house/play.htm')?postId=$coursePost.id';" style="display:none;">开始学习</span>
+						#end
+					#end
+				</div>
+			</div>
+			<div class="present-content jiathis_style_32x32">
+				<input type="hidden" value="$isOwn" id="isOwndiv">
+				<ul class="clearfix share-ul">
+					<li style="margin-right: 20px; margin-top: 10px;" class="fl"><p>分享：</p></li>
+					<div class="iShare iShare1" style="float:left;margin-top:10px;">
+						<a href="#" class="iShare_qq"><i class="xw-share-icon tencent" style="vertical-align: -2px;"></i></a>
+						<a href="#" class="iShare_qzone"><i class="xw-share-icon qzone"></i></a>
+						<a href="#" class="iShare_wechat"><i class="xw-share-icon wechat" style="vertical-align: -2px;"></i></a>
+						<a href="#" class="iShare_weibo"><i class="xw-share-icon weibo"></i></a>
+					</div>
+
+					<!-- JiaThis Button END -->
+                    <li style="font-size: 30px;margin-right: 20px;font-size: 30px;margin-top: 7px;font-family: Arial;margin-left: 50px;" class="fl clearfix">$!coursePost.totalJoin<i class="icon-eye"></i></li>
+                    
+                    #if($isOwn=="true")
+                    <li onclick="collectionCoursePost(this,'收藏','$coursePost.id');" class="icon-like fr active" title="点击取消收藏" time="0" style="cursor:pointer"></li>
+                    #else
+                    <li onclick="collectionCoursePost(this,'收藏','$coursePost.id');" class="icon-like fr" title="点击收藏" time="0" style="cursor:pointer"></li>
+                    #end
+				</ul>
+				<div class="present-textwrap">
+					<p class="text-p" style="padding: 0;" id="course_post_teachgoal_id">
+					#if($coursePost.gf_teachGoal=="")
+						$!coursePost.course.teachGoal 
+					#else 
+					#*
+						#if($coursePost.gf_teachGoal.length() >= 100)
+							#set($coursePost.gf_teachGoal =$coursePost.gf_teachGoal.substring(0, 100) + " ...")
+						#end
+					*#	
+						$!coursePost.gf_teachGoal 
+					#end</p>
+				</div>
+				<div class="present-textwrap clearfix">
+					<input type="hidden" value="$!coursePost.course.speakerIconPath" id="present-headimg">
+					<i class="present-headimg"></i>
+					<!-- <div class="fr" style="width:1010px;"> -->
+						<h1 style="font-size: 18px; font-weight: bold;">$!coursePost.course.speaker</h1>
+						<p style="margin: 5px 0;">
+							<span style="margin-right: 20px;" class="blue09f">$!coursePost.sname</span>
+						</p>
+						<p style="line-height: 28px;">$!coursePost.course.speakerDesc</p>
+					<!-- </div> -->
+				</div>
+				<p style="padding: 22px 40px; font-size: 18px; font-weight: bold;">课程概述</p>
+				<p class="text-p">#if($coursePost.gf_des=="")$!coursePost.course.des #else $!coursePost.gf_des #end </p>
+		
+				
+				<!-- <p style="padding: 22px 40px; font-size: 18px; font-weight: bold;">证书要求</p>
+				<p class="text-p">本课程的学习环节包含：观看讲课视频及其它课程资源、完成每周的单元测验题、参与课程讨论、参加期末考试。课程学习成绩由两部分构成：</p>
+				<p class="text-p" style="text-indent: 0px;">（1）单元测验：在每一周学习结束后，将有一次单元测验，题型为选择题，所有单元测验分数占课程成绩的40%。</p>
+				<p class="text-p" style="text-indent: 0px;">（2）课程考试：课程结束后，学生可以参加课程的最后考试，成绩占60%。
+				</p>
+				<p class="text-p" style="text-indent: 0px;">
+					完成课程学习并考核合格(>=60分)的可获得合格证书，成绩优秀(>80分)的可获得优秀证书。</p> -->
+				<p style="padding: 22px 40px; font-size: 18px; font-weight: bold;">课程目标</p>
+				<p class="text-p">#if($coursePost.gf_teachGoal=="")$!coursePost.course.teachGoal #else $!coursePost.gf_teachGoal #end</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="user-agree-wrap animated" style="display: none;">
+    <p class="agree-head">火苗应用使用协议</p>
+    <iframe class="agree-text" src="/agreement.htm" frameborder="0" scrolling="auto" ></iframe>
+    <div class="clearfix">
+        <div id="agree-btn">同意协议</div>
+    </div>
+</div>
+<div class="agree-grey-bg animated" style="display: none;"></div>
+
+<form action="indexDoSearch.htm" method="post" style="display:none;" id="search_form">
+    <input type='text' id='keyword' name='keyword'>
+</form>
+<script src="$link.relative('/resources_two/js/lessonpresent.js')"></script>
+	
+<!-- 分享按钮弹出的课程缩略图 -->
+<script type="text/javascript">
+	var imgurl=$(".present-img").css("background-image");
+	if(imgurl!=undefined){
+		if(imgurl.split("(\"")[1] != undefined){
+			imgurl=imgurl.split("(\"")[1].split("\")")[0];
+		}else{
+			imgurl=$('#present-img').val();
+		}
+	}
+	
+	var title=$('#course_post_title_id').html();
+	var summary=$('#course_post_teachgoal_id').html().substring(0, 100) + " ...";
+	
+	var current_url = window.location.href;
+	//替换url
+	var simpler_url = current_url.replace('lessonpresent','lessonpresent-simpler');
+	//simpler_url = 'http://test.zuoyeme.com/house/lessonpresent-simpler.htm?postId=11e7-a32a-89593be3-8094-f47e44';
+	
+	var jiathis_config = {
+		pic:imgurl,
+		title:title,
+		summary:summary,
+		url:simpler_url//分享的链接
+	};
+	
+	window.iShare_config = {container:'.iShare1',config:{
+		title: title,
+		description: summary,
+		url: simpler_url,
+		image: imgurl,
+		WXoptions:{
+			evenType: 'click',
+			isTitleVisibility: true,
+			title: '分享到微信朋友圈',
+			isTipVisibility: true,
+			tip: '打开微信，点击底部的“发现”，使用 “扫一扫” 即可将网页分享到我的朋友圈',
+			qrcodeW: 200,
+			qrcodeH: 200,
+			qrcodeBgc: '#fff',
+			qrcodeFgc: '#000',
+			bgcolor: '#fff'
+		}
+	}};
+	
+	$(document).ready(function(){
+		$('.share-ul').find('a').click(function(){
+			var postId = $('#hiddenPostId').val();
+			var postData = {postId:postId};
+			var url = "/personal/add.myshare.json";
+			var resultObj = queryInfo(url,postData);
+		});
+	});
+</script>
+<script type="text/javascript" src="/resources_two/share/iShare_tidy.js"></script>

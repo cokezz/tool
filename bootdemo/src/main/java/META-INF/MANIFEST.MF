@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Class-Path: hibernate-jpa-2.1-api-1.0.0.Final.jar slf4j-api-1.7.22.jar
+  validation-api-1.1.0.Final.jar spring-boot-1.5.1.RELEASE.jar spring-
+ data-keyvalue-1.2.0.RELEASE.jar mybatis-spring-1.3.1.jar commons-pool
+ 2-2.4.2.jar jackson-annotations-2.8.0.jar jandex-2.0.0.Final.jar ognl
+ -3.0.8.jar thymeleaf-layout-dialect-1.4.0.jar spring-aspects-4.3.6.RE
+ LEASE.jar mysql-connector-java-5.1.39.jar classmate-1.3.3.jar spring-
+ boot-starter-web-1.5.1.RELEASE.jar unbescape-1.1.0.RELEASE.jar spring
+ -boot-starter-data-jpa-1.5.1.RELEASE.jar mybatis-spring-boot-starter-
+ 1.3.0.jar jul-to-slf4j-1.7.22.jar antlr-2.7.7.jar jboss-logging-3.3.0
+ .Final.jar spring-jdbc-4.3.6.RELEASE.jar spring-webmvc-4.3.6.RELEASE.
+ jar spring-expression-4.3.6.RELEASE.jar tomcat-embed-core-8.5.11.jar 
+ spring-boot-starter-aop-1.5.1.RELEASE.jar javax.transaction-api-1.2.j
+ ar spring-core-4.3.6.RELEASE.jar groovy-2.4.7.jar dom4j-1.6.1.jar spr
+ ing-boot-starter-logging-1.5.1.RELEASE.jar spring-data-redis-1.8.0.RE
+ LEASE.jar spring-oxm-4.3.6.RELEASE.jar spring-boot-starter-1.5.1.RELE
+ ASE.jar spring-boot-autoconfigure-1.5.1.RELEASE.jar jcl-over-slf4j-1.
+ 7.22.jar hibernate-core-5.0.11.Final.jar spring-beans-4.3.6.RELEASE.j
+ ar spring-boot-starter-tomcat-1.5.1.RELEASE.jar spring-data-commons-1
+ .13.0.RELEASE.jar hibernate-commons-annotations-5.0.1.Final.jar sprin
+ g-context-support-4.3.6.RELEASE.jar jackson-databind-2.8.6.jar spring
+ -boot-starter-data-redis-1.5.1.RELEASE.jar log4j-over-slf4j-1.7.22.ja
+ r thymeleaf-spring4-2.1.5.RELEASE.jar mybatis-spring-boot-autoconfigu
+ re-1.3.0.jar jackson-core-2.8.6.jar spring-boot-starter-jdbc-1.5.1.RE
+ LEASE.jar spring-context-4.3.6.RELEASE.jar hibernate-entitymanager-5.
+ 0.11.Final.jar tomcat-juli-8.5.11.jar logback-core-1.1.9.jar tomcat-e
+ mbed-websocket-8.5.11.jar mybatis-3.4.4.jar spring-web-4.3.6.RELEASE.
+ jar aspectjweaver-1.8.9.jar snakeyaml-1.17.jar logback-classic-1.1.9.
+ jar spring-tx-4.3.6.RELEASE.jar spring-aop-4.3.6.RELEASE.jar tomcat-j
+ dbc-8.5.11.jar jedis-2.9.0.jar tomcat-embed-el-8.5.11.jar hibernate-v
+ alidator-5.3.4.Final.jar javassist-3.21.0-GA.jar thymeleaf-2.1.5.RELE
+ ASE.jar spring-orm-4.3.6.RELEASE.jar spring-boot-starter-thymeleaf-1.
+ 4.0.RELEASE.jar spring-data-jpa-1.11.0.RELEASE.jar
+Main-Class: com.roy.DemoApplication
+
